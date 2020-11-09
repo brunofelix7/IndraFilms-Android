@@ -1,4 +1,4 @@
-package com.indracompany.indrafilmsapp
+package com.indracompany.indrafilmsapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
