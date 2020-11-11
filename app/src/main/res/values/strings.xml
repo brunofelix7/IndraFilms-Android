@@ -3,4 +3,8 @@
     <!-- Nome do aplicativo -->
     <string name="app_name">Indra Films</string>
 
+    <!-- SplashScreen -->
+    <string name="bg_img_description">Imagem de background</string>
+    <string name="logo_img_description">Logo</string>
+
 </resources>
