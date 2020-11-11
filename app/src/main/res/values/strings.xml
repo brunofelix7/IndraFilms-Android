@@ -7,4 +7,9 @@
     <string name="bg_img_description">Imagem de background</string>
     <string name="logo_img_description">Logo</string>
 
+    <!-- LoginActivity -->
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Senha</string>
+    <string name="txt_btn_login">Login</string>
+
 </resources>
