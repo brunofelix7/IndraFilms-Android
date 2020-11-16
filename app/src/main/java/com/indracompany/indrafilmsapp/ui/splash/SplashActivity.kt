@@ -7,7 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.ui.login.LoginActivity
+import com.indracompany.indrafilmsapp.ui.main.MainActivity
 import com.indracompany.indrafilmsapp.util.SPLASH_TIME_OUT
+import com.indracompany.indrafilmsapp.util.getToken
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,10 +18,14 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            if (getToken(this) != null) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
         }, SPLASH_TIME_OUT)
-
     }
 
 }
