@@ -14,6 +14,11 @@
     <string name="login_message_error">E-mail ou senha inválidos</string>
 
     <!-- ##### MainActivity ##### -->
+    <string name="txt_title">Filmes mais populares de 2020</string>
+    <string name="txt_bg_icon">ícone</string>
+    <string name="rv_bg_img_description">Imagem do Poster</string>
+    <string name="rv_title_example">Avengers Endgame</string>
+    <string name="rv_release_date_example">25/04/2019</string>
 
     <!-- Preferences Keys -->
     <string name="app_pref">app_pref</string>

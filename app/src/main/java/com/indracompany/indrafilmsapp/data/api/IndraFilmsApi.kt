@@ -1,13 +1,15 @@
 package com.indracompany.indrafilmsapp.data.api
 
+import com.indracompany.indrafilmsapp.data.api.response.MovieResponse
 import com.indracompany.indrafilmsapp.data.api.response.TokenResponse
 import com.indracompany.indrafilmsapp.model.User
 import com.indracompany.indrafilmsapp.util.apiUrl
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface IndraFilmsApi {
@@ -24,5 +26,8 @@ interface IndraFilmsApi {
 
     @POST("auth")
     fun login(@Body user: User) : Call<TokenResponse>
+
+    @GET("movies")
+    fun movies(@Header("Authorization") token: String) : Call<List<MovieResponse>>
 
 }

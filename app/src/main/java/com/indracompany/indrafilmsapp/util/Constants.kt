@@ -1,7 +1,7 @@
 package com.indracompany.indrafilmsapp.util
 
 //  TAG
-const val TAG: String = "IndraFilmsApp_TAG"
+const val MY_TAG: String = "IndraFilmsApp_TAG"
 
 //  Time out da SplashActivity
 const val SPLASH_TIME_OUT: Long = 3000

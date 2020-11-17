@@ -1,10 +1,10 @@
 package com.indracompany.indrafilmsapp.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.ui.login.LoginActivity
 import com.indracompany.indrafilmsapp.ui.main.MainActivity

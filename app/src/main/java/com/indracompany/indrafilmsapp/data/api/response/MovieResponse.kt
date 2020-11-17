@@ -2,7 +2,7 @@ package com.indracompany.indrafilmsapp.data.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class FilmResponse(
+data class MovieResponse(
 
     @SerializedName("poster_path")
     val posterPath: String?,

@@ -6,7 +6,7 @@ import com.indracompany.indrafilmsapp.R
 fun saveToken(context: Context, token: String) {
     val pref = context.getSharedPreferences(context.getString(R.string.app_pref), Context.MODE_PRIVATE)
     with (pref.edit()) {
-        putString(context.getString(com.indracompany.indrafilmsapp.R.string.key_token), token)
+        putString(context.getString(R.string.key_token), "Bearer $token")
         apply()
     }
 }

@@ -13,6 +13,8 @@ import retrofit2.Response
 class UserRepository {
 
     fun userLogin(user: User) : LiveData<TokenResponse> {
+
+        //  Editora - Subject (Publicar)
         val loginResponse = MutableLiveData<TokenResponse>()
 
         IndraFilmsApi().login(user).enqueue(object: Callback<TokenResponse>{

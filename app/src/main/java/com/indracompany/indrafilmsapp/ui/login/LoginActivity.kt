@@ -16,7 +16,7 @@ import com.indracompany.indrafilmsapp.util.toast
 
 class LoginActivity : AppCompatActivity(), LoginListener {
 
-    var binding: ActivityLoginBinding? = null
+    private var binding: ActivityLoginBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
         val viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding?.viewModel = viewModel
 
+        //  Definir o meu LoginListener ao meu ViewModel, já que nossa classe já contem a implementacao do nosso LoginListener
         viewModel.loginListener = this
     }
 
@@ -33,15 +34,16 @@ class LoginActivity : AppCompatActivity(), LoginListener {
     }
 
     override fun onSuccess(response: LiveData<TokenResponse>) {
-        response.observe(this, { tokenResponse ->
-            if (tokenResponse?.token != null) {
-                saveToken(this, tokenResponse.token)
+        //  Assinante - Observer
+        response.observe(this, { data ->
+            if (data?.token != null) {
+                saveToken(this, data.token)
 
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
                 binding?.progressBar?.visibility = View.GONE
-                toast(tokenResponse.message)
+                toast(data.message)
             }
         })
     }
