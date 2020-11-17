@@ -1,10 +1,9 @@
 package com.indracompany.indrafilmsapp.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.GridLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -13,8 +12,7 @@ import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.adapter.MovieAdapter
 import com.indracompany.indrafilmsapp.data.api.response.MovieResponse
 import com.indracompany.indrafilmsapp.databinding.ActivityMainBinding
-import com.indracompany.indrafilmsapp.ui.login.LoginViewModel
-import com.indracompany.indrafilmsapp.util.MY_TAG
+import com.indracompany.indrafilmsapp.ui.details.DetailsActivity
 import com.indracompany.indrafilmsapp.util.getToken
 import com.indracompany.indrafilmsapp.util.toast
 
@@ -34,18 +32,18 @@ class MainActivity : AppCompatActivity(), MainListener {
     }
 
     override fun onStarted() {
-        Log.i(MY_TAG, "Buscando...")
+        binding?.progressBar?.visibility = View.VISIBLE
     }
 
     override fun onCompleted(response: LiveData<List<MovieResponse>>) {
         response.observe(this, { data ->
-            Log.i(MY_TAG, "Finish")
+            binding?.progressBar?.visibility = View.GONE
             if (data != null) {
                 binding?.rvMovies?.layoutManager = GridLayoutManager(this, 2)
                 binding?.rvMovies?.setHasFixedSize(true)
                 binding?.rvMovies?.adapter = MovieAdapter(data, this)
             } else {
-                Log.i(MY_TAG, "Error")
+                toast(resources.getString(R.string.msg_error))
             }
         })
     }
@@ -53,7 +51,11 @@ class MainActivity : AppCompatActivity(), MainListener {
     override fun onItemClick(view: View, movie: MovieResponse) {
         when (view.id) {
             R.id.cardMovie -> {
-                Log.i(MY_TAG, "${movie}")
+                startActivity(
+                    Intent(this, DetailsActivity::class.java).apply {
+                        putExtra(resources.getString(R.string.key_movie_details), movie)
+                    }
+                )
             }
         }
     }
