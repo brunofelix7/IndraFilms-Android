@@ -7,7 +7,7 @@ https://indrafilmsapi.herokuapp.com/swagger-ui.html
 ### REST Api - Base URL
 https://indrafilmsapi.herokuapp.com/
 
-![Captura de Tela 2020-11-08 às 19 54 00](https://user-images.githubusercontent.com/10690387/98486493-4b13dc00-21fc-11eb-86ea-d8bcaefdaa4b.png)
-![Captura de Tela 2020-11-08 às 19 54 05](https://user-images.githubusercontent.com/10690387/98486497-4d763600-21fc-11eb-9a62-900da95dc087.png)
-![Captura de Tela 2020-11-08 às 19 54 14](https://user-images.githubusercontent.com/10690387/98486498-4fd89000-21fc-11eb-88bb-5098599709b7.png)
-![Captura de Tela 2020-11-08 às 19 54 23](https://user-images.githubusercontent.com/10690387/98486500-51a25380-21fc-11eb-993e-1144d054af95.png)
+![Screen01](https://user-images.githubusercontent.com/10690387/99552721-18a47480-299c-11eb-96dd-677dca31e3fd.png)
+![Screen02](https://user-images.githubusercontent.com/10690387/99552732-1c37fb80-299c-11eb-8277-eac504e7be9c.png)
+![Screen03](https://user-images.githubusercontent.com/10690387/99552742-1f32ec00-299c-11eb-9452-12e7543788ec.png)
+![Screen04](https://user-images.githubusercontent.com/10690387/99552752-20fcaf80-299c-11eb-84ec-0305a9651a5f.png)
