@@ -19,7 +19,6 @@
     <string name="rv_bg_img_description">Imagem do Poster</string>
     <string name="rv_title_example">Avengers Endgame</string>
     <string name="rv_release_date_example">25/04/2019</string>
-    <string name="msg_error">Ops! Tente novamente</string>
 
     <!-- ##### DetailsActivity ##### -->
     <string name="toolbar_title">Detalhes do Filme</string>
@@ -38,5 +37,11 @@
 
     <!-- Extras Keys -->
     <string name="key_movie_details">KEY_MOVIE_DETAILS</string>
+
+    <!-- Messages -->
+    <string name="msg_error">Ops! Tente novamente</string>
+
+    <!-- Menu -->
+    <string name="menu_title">Logout</string>
 
 </resources>

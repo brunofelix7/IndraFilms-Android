@@ -2,6 +2,9 @@ package com.indracompany.indrafilmsapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,6 +17,7 @@ import com.indracompany.indrafilmsapp.data.api.response.MovieResponse
 import com.indracompany.indrafilmsapp.databinding.ActivityMainBinding
 import com.indracompany.indrafilmsapp.ui.details.DetailsActivity
 import com.indracompany.indrafilmsapp.util.getToken
+import com.indracompany.indrafilmsapp.util.logout
 import com.indracompany.indrafilmsapp.util.toast
 
 class MainActivity : AppCompatActivity(), MainListener {
@@ -29,6 +33,8 @@ class MainActivity : AppCompatActivity(), MainListener {
 
         viewModel.mainistener = this
         viewModel.listMovies(getToken(this)!!)
+
+        toolbarConfig()
     }
 
     override fun onStarted() {
@@ -56,6 +62,19 @@ class MainActivity : AppCompatActivity(), MainListener {
                         putExtra(resources.getString(R.string.key_movie_details), movie)
                     }
                 )
+            }
+        }
+    }
+
+    fun toolbarConfig() {
+        binding?.includeToolbar?.toolbarMain?.inflateMenu(R.menu.main_menu)
+        binding?.includeToolbar?.toolbarMain?.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_logout -> {
+                    logout()
+                    true
+                }
+                else -> super.onOptionsItemSelected(it)
             }
         }
     }
