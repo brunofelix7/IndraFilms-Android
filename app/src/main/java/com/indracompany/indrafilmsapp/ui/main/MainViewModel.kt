@@ -5,13 +5,13 @@ import com.indracompany.indrafilmsapp.data.api.repository.MovieRepository
 
 class MainViewModel : ViewModel() {
 
-    var mainistener: MainListener? = null
+    var mainListener: MainListener? = null
 
     fun listMovies(token: String) {
-        mainistener?.onStarted()
+        mainListener?.onStarted()
 
         val response = MovieRepository().listMovies(token)
-        mainistener?.onCompleted(response)
+        mainListener?.onCompleted(response)
     }
 
 }

@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity(), MainListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding?.viewModel = viewModel
+        viewModel.mainListener = this
 
-        viewModel.mainistener = this
         viewModel.listMovies(getToken(this)!!)
 
         toolbarConfig()
@@ -68,13 +68,13 @@ class MainActivity : AppCompatActivity(), MainListener {
 
     fun toolbarConfig() {
         binding?.includeToolbar?.toolbarMain?.inflateMenu(R.menu.main_menu)
-        binding?.includeToolbar?.toolbarMain?.setOnMenuItemClickListener {
-            when (it.itemId) {
+        binding?.includeToolbar?.toolbarMain?.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
                 R.id.menu_logout -> {
                     logout()
                     true
                 }
-                else -> super.onOptionsItemSelected(it)
+                else -> super.onOptionsItemSelected(item)
             }
         }
     }

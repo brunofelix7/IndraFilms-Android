@@ -1,6 +1,5 @@
 package com.indracompany.indrafilmsapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,14 +8,13 @@ import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.data.api.response.MovieResponse
 import com.indracompany.indrafilmsapp.databinding.ItemMovieCardBinding
 import com.indracompany.indrafilmsapp.ui.main.MainListener
-import com.indracompany.indrafilmsapp.util.MY_TAG
 
 class MovieAdapter(
     private val movies: List<MovieResponse>,
-    private val listener: MainListener) : RecyclerView.Adapter<MovieAdapter.FilmViewHolder>() {
+    private val listener: MainListener) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        FilmViewHolder(
+        MovieViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.item_movie_card,
@@ -25,7 +23,7 @@ class MovieAdapter(
             )
         )
 
-    override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.binding.movie = movies[position]
         holder.binding.cardMovie.setOnClickListener {
             listener.onItemClick(holder.binding.cardMovie, movies[position])
@@ -37,7 +35,7 @@ class MovieAdapter(
     /**
      * Classe ViewHolder
      */
-    inner class FilmViewHolder(val binding: ItemMovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MovieViewHolder(val binding: ItemMovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 

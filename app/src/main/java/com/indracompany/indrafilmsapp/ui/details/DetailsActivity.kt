@@ -21,18 +21,10 @@ class DetailsActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
         binding?.viewModel = viewModel
 
-        val movie =
-            intent.extras?.getParcelable<MovieResponse>(resources.getString(R.string.key_movie_details))
+        val movie = intent.extras?.getParcelable<MovieResponse>(resources.getString(R.string.key_movie_details))
 
         toolbarConfig()
         bindingViews(movie)
-    }
-
-    fun toolbarConfig() {
-        binding?.includeToolbar?.toolbar?.setNavigationIcon(R.drawable.ic_arrow_left)
-        binding?.includeToolbar?.toolbar?.setOnClickListener {
-            finish()
-        }
     }
 
     fun bindingViews(movie: MovieResponse?) {
@@ -43,11 +35,18 @@ class DetailsActivity : AppCompatActivity() {
             viewModel?.average = movie.voteAverage.toString()
             viewModel?.overview = movie.overview
 
-            averageViewConfig(movie.voteAverage)
+            changeColorByAverage(movie.voteAverage)
         }
     }
 
-    fun averageViewConfig(average: Double?) {
+    fun toolbarConfig() {
+        binding?.includeToolbar?.toolbar?.setNavigationIcon(R.drawable.ic_arrow_left)
+        binding?.includeToolbar?.toolbar?.setOnClickListener {
+            finish()
+        }
+    }
+
+    fun changeColorByAverage(average: Double?) {
         if (average!! < 7.0) {
             binding?.txtAverage?.setTextColor(ContextCompat.getColor(this, R.color.red))
         } else {
