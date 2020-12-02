@@ -32,9 +32,7 @@ class MovieAdapter(
 
     override fun getItemCount() = movies.size
 
-    /**
-     * Classe ViewHolder
-     */
+    /** ViewHolder */
     inner class MovieViewHolder(val binding: ItemMovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }

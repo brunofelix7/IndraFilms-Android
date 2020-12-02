@@ -1,7 +1,6 @@
 package com.indracompany.indrafilmsapp.ui.login
 
 import android.view.View
-import android.widget.ProgressBar
 import androidx.lifecycle.ViewModel
 import com.indracompany.indrafilmsapp.data.api.repository.UserRepository
 import com.indracompany.indrafilmsapp.model.User
@@ -21,6 +20,7 @@ class LoginViewModel : ViewModel() {
         }
 
         val response = UserRepository().userLogin(User(email!!, password!!))
+
         loginListener?.onSuccess(response)
     }
 

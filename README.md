@@ -7,6 +7,10 @@ https://indrafilmsapi.herokuapp.com/swagger-ui.html
 ### REST Api - Base URL
 https://indrafilmsapi.herokuapp.com/
 
+Autenticação
+E-mail: bfelix@indracompany.com
+Senha: 123456
+
 ![Screen01](https://user-images.githubusercontent.com/10690387/99552721-18a47480-299c-11eb-96dd-677dca31e3fd.png)
 
 ![Screen02](https://user-images.githubusercontent.com/10690387/99552732-1c37fb80-299c-11eb-8277-eac504e7be9c.png)

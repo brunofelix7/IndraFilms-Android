@@ -43,5 +43,6 @@
 
     <!-- Menu -->
     <string name="menu_title">Logout</string>
+    <string name="txt_name">Bruno Felix</string>
 
 </resources>

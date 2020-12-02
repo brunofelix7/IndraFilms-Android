@@ -2,9 +2,6 @@ package com.indracompany.indrafilmsapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -23,17 +20,11 @@ import com.indracompany.indrafilmsapp.util.toast
 class MainActivity : AppCompatActivity(), MainListener {
 
     private var binding: ActivityMainBinding? = null
+    private var viewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding?.viewModel = viewModel
-        viewModel.mainListener = this
-
-        viewModel.listMovies(getToken(this)!!)
-
+        bindingConfig()
         toolbarConfig()
     }
 
@@ -66,7 +57,17 @@ class MainActivity : AppCompatActivity(), MainListener {
         }
     }
 
-    fun toolbarConfig() {
+    private fun bindingConfig() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        binding?.viewModel = viewModel
+        viewModel?.mainListener = this
+
+        viewModel?.listMovies(getToken(this)!!)
+    }
+
+    private fun toolbarConfig() {
         binding?.includeToolbar?.toolbarMain?.inflateMenu(R.menu.main_menu)
         binding?.includeToolbar?.toolbarMain?.setOnMenuItemClickListener { item ->
             when (item.itemId) {

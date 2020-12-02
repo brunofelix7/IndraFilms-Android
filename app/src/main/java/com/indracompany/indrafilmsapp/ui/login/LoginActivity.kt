@@ -17,16 +17,11 @@ import com.indracompany.indrafilmsapp.util.toast
 class LoginActivity : AppCompatActivity(), LoginListener {
 
     private var binding: ActivityLoginBinding? = null
+    private var viewModel: LoginViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        binding?.viewModel = viewModel
-
-        //  Definir o meu LoginListener ao meu ViewModel, já que nossa classe já contem a implementacao do nosso LoginListener
-        viewModel.loginListener = this
+        bindingConfig()
     }
 
     override fun onStarted() {
@@ -34,7 +29,6 @@ class LoginActivity : AppCompatActivity(), LoginListener {
     }
 
     override fun onSuccess(response: LiveData<TokenResponse>) {
-        //  Assinante - Observer
         response.observe(this, { data ->
             if (data?.token != null) {
                 saveToken(this, data.token)
@@ -51,6 +45,14 @@ class LoginActivity : AppCompatActivity(), LoginListener {
     override fun onError(message: String) {
         binding?.progressBar?.visibility = View.GONE
         toast(message)
+    }
+
+    private fun bindingConfig() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        binding?.viewModel = viewModel
+        viewModel?.loginListener = this
     }
 
 }

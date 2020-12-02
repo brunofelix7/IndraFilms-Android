@@ -20,8 +20,8 @@ interface IndraFilmsApi {
         operator fun invoke(): IndraFilmsApi {
             val okHttpClient = OkHttpClient.Builder().apply {
                 connectTimeout(1, TimeUnit.MINUTES)
-                readTimeout(45, TimeUnit.SECONDS)
-                writeTimeout(45, TimeUnit.SECONDS)
+                readTimeout(60, TimeUnit.SECONDS)
+                writeTimeout(60, TimeUnit.SECONDS)
                 build()
             }
 
