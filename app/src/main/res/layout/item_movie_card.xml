@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="movie"
-            type="com.indracompany.indrafilmsapp.data.api.response.MovieResponse" />
+            type="com.indracompany.indrafilmsapp.data.api.model.Movie" />
     </data>
 
     <LinearLayout
@@ -30,12 +31,22 @@
                 android:background="@color/dark"
                 android:orientation="vertical">
 
+                <ProgressBar
+                    android:id="@+id/progressBar_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/red"
+                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/imgPoster"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:contentDescription="@string/rv_bg_img_description"
                     android:scaleType="centerCrop"
+                    android:visibility="visible"
                     app:image="@{movie.posterPath}"
                     app:srcCompat="@drawable/img_poster" />
 

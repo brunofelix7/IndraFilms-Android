@@ -1,10 +1,10 @@
 package com.indracompany.indrafilmsapp.util
 
 //  TAG
-const val MY_TAG: String = "IndraFilmsApp_TAG"
+const val MY_TAG: String = "IndraFilmsApp_Log"
 
 //  Time out da SplashActivity
 const val SPLASH_TIME_OUT: Long = 3000
 
-//  Url da api
-const val apiUrl: String = "https://indrafilmsapi.herokuapp.com/api/"
+//  Api base url
+const val BASE_URL: String = "https://indrafilmsapi.herokuapp.com/api/"

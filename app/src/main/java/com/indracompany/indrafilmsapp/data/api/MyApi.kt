@@ -1,9 +1,9 @@
 package com.indracompany.indrafilmsapp.data.api
 
-import com.indracompany.indrafilmsapp.data.api.response.MovieResponse
-import com.indracompany.indrafilmsapp.data.api.response.TokenResponse
-import com.indracompany.indrafilmsapp.model.User
-import com.indracompany.indrafilmsapp.util.apiUrl
+import com.indracompany.indrafilmsapp.data.api.model.Movie
+import com.indracompany.indrafilmsapp.data.api.model.TokenResponse
+import com.indracompany.indrafilmsapp.data.api.model.User
+import com.indracompany.indrafilmsapp.util.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -14,10 +14,10 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
-interface IndraFilmsApi {
+interface MyApi {
 
     companion object {
-        operator fun invoke(): IndraFilmsApi {
+        operator fun invoke(): MyApi {
             val okHttpClient = OkHttpClient.Builder().apply {
                 connectTimeout(1, TimeUnit.MINUTES)
                 readTimeout(60, TimeUnit.SECONDS)
@@ -26,11 +26,11 @@ interface IndraFilmsApi {
             }
 
             return Retrofit.Builder()
-                .baseUrl(apiUrl)
+                .baseUrl(BASE_URL)
                 .client(okHttpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(IndraFilmsApi::class.java)
+                .create(MyApi::class.java)
         }
     }
 
@@ -38,6 +38,6 @@ interface IndraFilmsApi {
     fun login(@Body user: User): Call<TokenResponse>
 
     @GET("movies")
-    fun movies(@Header("Authorization") token: String): Call<List<MovieResponse>>
+    fun movies(@Header("Authorization") token: String): Call<List<Movie>>
 
 }

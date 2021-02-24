@@ -12,6 +12,7 @@
     <string name="hint_password">Senha</string>
     <string name="txt_btn_login">Login</string>
     <string name="login_message_error">E-mail ou senha inválidos</string>
+    <string name="fields_required">Campos obrigatórios</string>
 
     <!-- ##### MainActivity ##### -->
     <string name="txt_title">Filmes mais populares de 2020</string>
@@ -44,5 +45,8 @@
     <!-- Menu -->
     <string name="menu_title">Logout</string>
     <string name="txt_name">Bruno Felix</string>
+
+    <!-- Logo contentDescription -->
+    <string name="txt_contentDescription">Logo</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.indracompany.indrafilmsapp.data.api.response
+package com.indracompany.indrafilmsapp.data.api.model
 
 import com.google.gson.annotations.SerializedName
 

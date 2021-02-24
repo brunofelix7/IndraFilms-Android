@@ -1,7 +1,7 @@
 package com.indracompany.indrafilmsapp.ui.login
 
 import androidx.lifecycle.LiveData
-import com.indracompany.indrafilmsapp.data.api.response.TokenResponse
+import com.indracompany.indrafilmsapp.data.api.model.TokenResponse
 
 interface LoginListener {
 

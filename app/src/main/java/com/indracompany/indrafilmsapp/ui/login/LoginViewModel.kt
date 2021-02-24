@@ -1,27 +1,30 @@
 package com.indracompany.indrafilmsapp.ui.login
 
+import android.app.Application
 import android.view.View
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.data.api.repository.UserRepository
-import com.indracompany.indrafilmsapp.model.User
+import com.indracompany.indrafilmsapp.data.api.model.User
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    application: Application,
+    private val repository: UserRepository
+) : AndroidViewModel(application) {
 
     var email: String? = null
     var password: String? = null
-    var loginListener: LoginListener? = null
+    var listener: LoginListener? = null
 
     fun onBtnLoginClick(view: View) {
-        loginListener?.onStarted()
+        listener?.onStarted()
 
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            loginListener?.onError("Campos obrigatórios")
+            listener?.onError(getApplication<Application>().resources.getString(R.string.fields_required))
             return
         }
 
-        val response = UserRepository().userLogin(User(email!!, password!!))
-
-        loginListener?.onSuccess(response)
+        listener?.onSuccess(repository.userLogin(User(email!!, password!!)))
     }
 
 }
