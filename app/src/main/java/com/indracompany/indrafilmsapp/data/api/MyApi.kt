@@ -1,7 +1,8 @@
 package com.indracompany.indrafilmsapp.data.api
 
+import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
 import com.indracompany.indrafilmsapp.data.api.model.Movie
-import com.indracompany.indrafilmsapp.data.api.model.TokenResponse
+import com.indracompany.indrafilmsapp.data.api.model.Token
 import com.indracompany.indrafilmsapp.data.api.model.User
 import com.indracompany.indrafilmsapp.util.BASE_URL
 import okhttp3.OkHttpClient
@@ -35,9 +36,9 @@ interface MyApi {
     }
 
     @POST("auth")
-    fun login(@Body user: User): Call<TokenResponse>
+    fun login(@Body user: User): Call<ApiResponse<Token>>
 
     @GET("movies")
-    fun movies(@Header("Authorization") token: String): Call<List<Movie>>
+    fun movies(@Header("Authorization") token: String): Call<ApiResponse<List<Movie>>>
 
 }

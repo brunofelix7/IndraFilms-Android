@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import com.indracompany.indrafilmsapp.data.api.model.TokenResponse
+import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
+import com.indracompany.indrafilmsapp.data.api.model.Token
 import com.indracompany.indrafilmsapp.databinding.ActivityLoginBinding
 import com.indracompany.indrafilmsapp.extension.toast
 import com.indracompany.indrafilmsapp.ui.BaseActivity
@@ -30,10 +31,10 @@ class LoginActivity : AppCompatActivity(), BaseActivity, LoginListener {
         binding.progressBar.visibility = View.VISIBLE
     }
 
-    override fun onSuccess(response: LiveData<TokenResponse>) {
+    override fun onSuccess(response: LiveData<ApiResponse<Token>>) {
         response.observe(this, { data ->
-            if (data?.token != null) {
-                saveToken(this, data.token)
+            if (data.statusCode == 200) {
+                saveToken(this, data.body?.token!!)
 
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

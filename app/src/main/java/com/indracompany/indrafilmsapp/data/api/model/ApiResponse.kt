@@ -2,15 +2,13 @@ package com.indracompany.indrafilmsapp.data.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TokenResponse(
-
+data class ApiResponse<T>(
     @SerializedName("statusCode")
     val statusCode: Int,
 
     @SerializedName("message")
     var message: String,
 
-    @SerializedName("token")
-    val token: String
-
+    @SerializedName("body")
+    val body: T?
 )

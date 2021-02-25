@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.adapter.MovieAdapter
+import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
 import com.indracompany.indrafilmsapp.data.api.model.Movie
 import com.indracompany.indrafilmsapp.databinding.ActivityMainBinding
 import com.indracompany.indrafilmsapp.extension.logout
@@ -33,15 +34,15 @@ class MainActivity : AppCompatActivity(), MainListener {
         binding.progressBar.visibility = View.VISIBLE
     }
 
-    override fun onCompleted(response: LiveData<List<Movie>>) {
+    override fun onCompleted(response: LiveData<ApiResponse<List<Movie>>>) {
         response.observe(this, { data ->
             binding.progressBar.visibility = View.GONE
-            if (data != null) {
+            if (data.statusCode == 200) {
                 binding.rvMovies.layoutManager = GridLayoutManager(this, 2)
                 binding.rvMovies.setHasFixedSize(true)
-                binding.rvMovies.adapter = MovieAdapter(data, this)
+                binding.rvMovies.adapter = MovieAdapter(data.body!!, this)
             } else {
-                toast(resources.getString(R.string.msg_error))
+                toast(data.message)
             }
         })
     }
