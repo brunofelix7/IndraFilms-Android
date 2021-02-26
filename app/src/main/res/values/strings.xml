@@ -43,7 +43,8 @@
     <string name="msg_error">Ops! Tente novamente</string>
 
     <!-- Menu -->
-    <string name="menu_title">Logout</string>
+    <string name="menu_title_logout">Logout</string>
+    <string name="menu_title_sync">Sincronizar</string>
     <string name="txt_name">Bruno Felix</string>
 
     <!-- Logo contentDescription -->

@@ -2,21 +2,17 @@ package com.indracompany.indrafilmsapp.extension
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.indracompany.indrafilmsapp.R
-import com.indracompany.indrafilmsapp.ui.login.LoginActivity
 
 fun Activity.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
-fun Activity.logout() {
-    val pref = this.getSharedPreferences(this.getString(R.string.app_pref), Context.MODE_PRIVATE)
-    with (pref.edit()) {
-        clear()
-        apply()
+fun Activity.hideKeyboard() {
+    val view = this.currentFocus
+    if (view != null) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-    startActivity(Intent(this, LoginActivity::class.java))
-    finish()
 }

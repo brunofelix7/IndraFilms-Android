@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.data.api.model.Movie
 import com.indracompany.indrafilmsapp.databinding.ItemMovieCardBinding
-import com.indracompany.indrafilmsapp.ui.main.MainListener
+import com.indracompany.indrafilmsapp.listener.MainListener
 
 class MovieAdapter(
     private val movies: List<Movie>,

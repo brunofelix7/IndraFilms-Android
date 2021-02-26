@@ -1,26 +1,25 @@
-package com.indracompany.indrafilmsapp.ui.details
+package com.indracompany.indrafilmsapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.data.api.model.Movie
-import com.indracompany.indrafilmsapp.databinding.ActivityDetailsBinding
-import com.indracompany.indrafilmsapp.ui.BaseActivity
+import com.indracompany.indrafilmsapp.databinding.ActivityDetailBinding
 import com.indracompany.indrafilmsapp.util.loadImage
 
-class DetailsActivity : AppCompatActivity(), BaseActivity {
+class DetailActivity : AppCompatActivity() {
 
     //  ViewBinding
-    private lateinit var binding: ActivityDetailsBinding
+    private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeViews()
     }
 
-    override fun initializeViews() {
-        binding = ActivityDetailsBinding.inflate(layoutInflater).apply {
+    fun initializeViews() {
+        binding = ActivityDetailBinding.inflate(layoutInflater).apply {
             setContentView(root)
         }
 

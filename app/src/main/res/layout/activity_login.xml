@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.indracompany.indrafilmsapp.ui.login.LoginViewModel" />
+            type="com.indracompany.indrafilmsapp.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.LoginActivity">
+        tools:context=".ui.LoginActivity">
 
         <FrameLayout
             android:id="@+id/frameLayout"

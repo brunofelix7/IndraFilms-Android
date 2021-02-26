@@ -1,17 +1,19 @@
 package com.indracompany.indrafilmsapp.di
 
-import com.indracompany.indrafilmsapp.data.api.MyApi
+import com.indracompany.indrafilmsapp.data.api.ApiService
 import com.indracompany.indrafilmsapp.data.api.repository.MovieRepository
 import com.indracompany.indrafilmsapp.data.api.repository.UserRepository
-import com.indracompany.indrafilmsapp.ui.login.LoginViewModel
-import com.indracompany.indrafilmsapp.ui.main.MainViewModel
+import com.indracompany.indrafilmsapp.viewmodel.LoginViewModel
+import com.indracompany.indrafilmsapp.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val mainModule = module {
 
     single {
-        MyApi()
+        ApiService(
+            context = get()
+        )
     }
 
     viewModel {
@@ -24,7 +26,6 @@ val mainModule = module {
 
     viewModel {
         LoginViewModel(
-            application = get(),
             UserRepository(
                 api = get()
             )

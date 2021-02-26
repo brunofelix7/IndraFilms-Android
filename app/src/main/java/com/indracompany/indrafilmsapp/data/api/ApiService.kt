@@ -1,28 +1,43 @@
 package com.indracompany.indrafilmsapp.data.api
 
+import android.content.Context
 import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
 import com.indracompany.indrafilmsapp.data.api.model.Movie
 import com.indracompany.indrafilmsapp.data.api.model.Token
 import com.indracompany.indrafilmsapp.data.api.model.User
 import com.indracompany.indrafilmsapp.util.BASE_URL
+import com.indracompany.indrafilmsapp.util.getToken
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.Call
+import okhttp3.Request
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
-interface MyApi {
+interface ApiService {
 
     companion object {
-        operator fun invoke(): MyApi {
+        operator fun invoke(context: Context): ApiService {
+            val interceptor = Interceptor { chain ->
+                val original: Request = chain.request()
+
+                val request: Request = original.newBuilder()
+                    .header("Authorization", getToken(context) ?: "")
+                    .method(original.method(), original.body())
+                    .build()
+
+                chain.proceed(request)
+            }
+
             val okHttpClient = OkHttpClient.Builder().apply {
                 connectTimeout(1, TimeUnit.MINUTES)
                 readTimeout(60, TimeUnit.SECONDS)
                 writeTimeout(60, TimeUnit.SECONDS)
+                addInterceptor(interceptor)
                 build()
             }
 
@@ -31,14 +46,14 @@ interface MyApi {
                 .client(okHttpClient.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(MyApi::class.java)
+                .create(ApiService::class.java)
         }
     }
 
     @POST("auth")
-    fun login(@Body user: User): Call<ApiResponse<Token>>
+    suspend fun login(@Body user: User): Response<ApiResponse<Token>>
 
     @GET("movies")
-    fun movies(@Header("Authorization") token: String): Call<ApiResponse<List<Movie>>>
+    suspend fun fetchMovies(): Response<ApiResponse<List<Movie>>>
 
 }
