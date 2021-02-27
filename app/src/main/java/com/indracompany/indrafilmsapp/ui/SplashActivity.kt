@@ -5,18 +5,34 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.indracompany.indrafilmsapp.R
-import com.indracompany.indrafilmsapp.util.SPLASH_TIME_OUT
-import com.indracompany.indrafilmsapp.util.getToken
+import com.indracompany.indrafilmsapp.session.SessionManager
+import com.indracompany.indrafilmsapp.databinding.ActivitySplashBinding
+import org.koin.android.ext.android.inject
 
 class SplashActivity : AppCompatActivity() {
 
+    //  ViewBinding
+    private lateinit var binding: ActivitySplashBinding
+
+    //  Koin inject
+    private val sessionManager: SessionManager by inject()
+
+    companion object {
+        const val SPLASH_TIME_OUT: Long = 3000
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        initializeViews()
+    }
+
+    private fun initializeViews() {
+        binding = ActivitySplashBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+        }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if (getToken(this) != null) {
+            if (sessionManager.fetchAuthToken() != null) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
@@ -25,5 +41,4 @@ class SplashActivity : AppCompatActivity() {
             }
         }, SPLASH_TIME_OUT)
     }
-
 }

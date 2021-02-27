@@ -1,10 +1,8 @@
 package com.indracompany.indrafilmsapp.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,10 +10,12 @@ import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.adapter.MovieAdapter
 import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
 import com.indracompany.indrafilmsapp.data.api.model.Movie
+import com.indracompany.indrafilmsapp.session.SessionManager
 import com.indracompany.indrafilmsapp.databinding.ActivityMainBinding
 import com.indracompany.indrafilmsapp.extension.toast
 import com.indracompany.indrafilmsapp.listener.MainListener
 import com.indracompany.indrafilmsapp.viewmodel.MainViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), MainListener {
@@ -25,10 +25,25 @@ class MainActivity : AppCompatActivity(), MainListener {
 
     //  Koin inject
     private val viewModel: MainViewModel by viewModel()
+    private val sessionManager: SessionManager by inject()
+
+    companion object {
+        const val KEY_MOVIE: String = "key_movie"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeViews()
+    }
+
+    private fun initializeViews() {
+        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+        }
+        viewModel.listener = this
+        viewModel.fetchMovies()
+
+        toolbarSettings()
     }
 
     override fun onLoading() {
@@ -59,21 +74,11 @@ class MainActivity : AppCompatActivity(), MainListener {
             R.id.cardMovie -> {
                 startActivity(
                     Intent(this, DetailActivity::class.java).apply {
-                        putExtra(resources.getString(R.string.key_movie_details), movie)
+                        putExtra(KEY_MOVIE, movie)
                     }
                 )
             }
         }
-    }
-
-    private fun initializeViews() {
-        binding = ActivityMainBinding.inflate(layoutInflater).apply {
-            setContentView(root)
-        }
-        viewModel.listener = this
-        viewModel.fetchMovies()
-
-        toolbarSettings()
     }
 
     private fun toolbarSettings() {
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity(), MainListener {
         binding.includeToolbar.toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.menu_logout -> {
-                    logout()
+                    sessionManager.appLogout(this)
                     true
                 }
                 R.id.menu_sync -> {
@@ -91,27 +96,5 @@ class MainActivity : AppCompatActivity(), MainListener {
                 else -> super.onOptionsItemSelected(item)
             }
         }
-    }
-
-    private fun logout() {
-        val builder = AlertDialog.Builder(this)
-        builder.setPositiveButton("Yes") { _, _ ->
-            val pref = this.getSharedPreferences(this.getString(R.string.app_pref), Context.MODE_PRIVATE)
-            with(pref.edit()) {
-                clear()
-                apply()
-            }
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            finish()
-        }
-        builder.setNegativeButton("No") {_, _ ->
-
-        }
-        builder.setTitle("Logout the application?")
-        builder.setMessage("Are you sure you want to logout the application?")
-        builder.create()
-        builder.show()
     }
 }

@@ -17,7 +17,7 @@
     <!-- ##### MainActivity ##### -->
     <string name="txt_title">Filmes mais populares de 2020</string>
     <string name="txt_bg_icon">ícone</string>
-    <string name="rv_bg_img_description">Imagem do Poster</string>
+    <string name="rv_bg_img_description">Poster</string>
     <string name="rv_title_example">Avengers Endgame</string>
     <string name="rv_release_date_example">25/04/2019</string>
 
@@ -31,13 +31,6 @@
     <string name="txt_release_date_example">25/04/2019</string>
     <string name="txt_average">10.0</string>
     <string name="txt_overview_example">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-
-    <!-- Preferences Keys -->
-    <string name="app_pref">app_pref</string>
-    <string name="key_token">KEY_TOKEN</string>
-
-    <!-- Extras Keys -->
-    <string name="key_movie_details">KEY_MOVIE_DETAILS</string>
 
     <!-- Messages -->
     <string name="msg_error">Ops! Tente novamente</string>

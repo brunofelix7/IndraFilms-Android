@@ -6,5 +6,7 @@ import com.indracompany.indrafilmsapp.data.api.model.User
 import retrofit2.Response
 
 interface IUserRepository {
+
     suspend fun userLogin(user: User) : Response<ApiResponse<Token>>
+
 }

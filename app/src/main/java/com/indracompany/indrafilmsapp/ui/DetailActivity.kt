@@ -18,12 +18,12 @@ class DetailActivity : AppCompatActivity() {
         initializeViews()
     }
 
-    fun initializeViews() {
+    private fun initializeViews() {
         binding = ActivityDetailBinding.inflate(layoutInflater).apply {
             setContentView(root)
         }
 
-        val movie = intent.extras?.getParcelable<Movie>(resources.getString(R.string.key_movie_details))
+        val movie = intent.extras?.getParcelable<Movie>(MainActivity.KEY_MOVIE)
 
         toolbarSettings()
         fillFields(movie)

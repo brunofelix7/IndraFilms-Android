@@ -3,6 +3,7 @@ package com.indracompany.indrafilmsapp.data.api.model
 import com.google.gson.annotations.SerializedName
 
 data class ApiResponse<T>(
+
     @SerializedName("statusCode")
     val statusCode: Int,
 
@@ -10,5 +11,6 @@ data class ApiResponse<T>(
     var message: String,
 
     @SerializedName("body")
-    val body: T?
+    val body: T? = null
+
 )

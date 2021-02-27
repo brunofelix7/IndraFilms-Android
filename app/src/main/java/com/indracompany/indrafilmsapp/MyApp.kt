@@ -1,11 +1,10 @@
 package com.indracompany.indrafilmsapp
 
 import android.app.Application
-import com.indracompany.indrafilmsapp.di.mainModule
+import com.indracompany.indrafilmsapp.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
 class MyApp : Application() {
 
@@ -15,8 +14,7 @@ class MyApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApp)
-            modules(mainModule)
+            modules(appModule)
         }
     }
-
 }

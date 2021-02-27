@@ -15,8 +15,8 @@ import kotlinx.coroutines.withContext
 class MainViewModel(private val repository: MovieRepository) : ViewModel() {
 
     //  LiveData
-    private val _data = MutableLiveData<ApiResponse<List<Movie>>>()
-    val data: LiveData<ApiResponse<List<Movie>>> get() = _data
+    private val _movies = MutableLiveData<ApiResponse<List<Movie>>>()
+    val movies: LiveData<ApiResponse<List<Movie>>> get() = _movies
 
     //  Listener
     var listener: MainListener? = null
@@ -31,8 +31,8 @@ class MainViewModel(private val repository: MovieRepository) : ViewModel() {
 
             if (response.isSuccessful) {
                 withContext(Dispatchers.Main) {
-                    _data.value = response.body()
-                    listener?.onSuccess(data)
+                    _movies.value = response.body()
+                    listener?.onSuccess(movies)
                 }
             } else {
                 withContext(Dispatchers.Main) {
