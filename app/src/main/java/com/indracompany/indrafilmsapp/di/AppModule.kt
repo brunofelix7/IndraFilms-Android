@@ -8,7 +8,6 @@ import com.indracompany.indrafilmsapp.data.db.repository.UserDbRepository
 import com.indracompany.indrafilmsapp.session.SessionManager
 import com.indracompany.indrafilmsapp.viewmodel.LoginViewModel
 import com.indracompany.indrafilmsapp.viewmodel.MainViewModel
-import com.indracompany.indrafilmsapp.viewmodel.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -26,15 +25,6 @@ val appModule = module {
     //  AuthInterceptor provider
     single { AuthInterceptor() }
 
-    //  SplashViewModel provider
-    viewModel {
-        SplashViewModel(
-            repositoryDb = UserDbRepository(
-                dao = provideUserDao(db = get())
-            )
-        )
-    }
-
     //  MainViewModel provider
     viewModel {
         MainViewModel(
@@ -45,8 +35,8 @@ val appModule = module {
     //  LoginViewModel provider
     viewModel {
         LoginViewModel(
-            repository = UserRepository(),
-            repositoryDb = UserDbRepository(
+            apiRepository = UserRepository(),
+            dbRepository = UserDbRepository(
                 dao = provideUserDao(db = get())
             )
         )

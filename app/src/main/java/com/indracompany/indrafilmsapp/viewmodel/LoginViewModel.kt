@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LoginViewModel(
-    private val repository: UserRepository,
-    private val repositoryDb: UserDbRepository
+    private val apiRepository: UserRepository,
+    private val dbRepository: UserDbRepository
 ) : ViewModel() {
 
     //  LiveData
@@ -41,7 +41,7 @@ class LoginViewModel(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.userLogin(User(email!!, password!!))
+            val response = apiRepository.userLogin(User(email!!, password!!))
 
             if (response.isSuccessful) {
                 withContext(Dispatchers.Main) {
@@ -58,7 +58,7 @@ class LoginViewModel(
 
     fun saveUser(userEntity: UserEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            repositoryDb.insert(userEntity)
+            dbRepository.insert(userEntity)
         }
     }
 }
