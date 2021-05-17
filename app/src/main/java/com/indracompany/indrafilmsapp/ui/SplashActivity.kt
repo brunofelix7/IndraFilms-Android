@@ -7,15 +7,16 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.indracompany.indrafilmsapp.session.SessionManager
 import com.indracompany.indrafilmsapp.databinding.ActivitySplashBinding
-import org.koin.android.ext.android.inject
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    //  ViewBinding
     private lateinit var binding: ActivitySplashBinding
 
-    //  Koin inject
-    private val sessionManager: SessionManager by inject()
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     companion object {
         const val SPLASH_TIME_OUT: Long = 3000
@@ -33,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (sessionManager.fetchAuthToken() != null) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, MovieActivity::class.java))
                 finish()
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))

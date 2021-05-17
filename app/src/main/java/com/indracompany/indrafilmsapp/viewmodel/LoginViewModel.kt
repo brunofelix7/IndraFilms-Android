@@ -1,64 +1,62 @@
 package com.indracompany.indrafilmsapp.viewmodel
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.indracompany.indrafilmsapp.data.api.ApiResult
 import com.indracompany.indrafilmsapp.data.api.model.ApiResponse
 import com.indracompany.indrafilmsapp.data.api.model.Token
 import com.indracompany.indrafilmsapp.data.api.model.User
-import com.indracompany.indrafilmsapp.data.api.repository.UserRepository
-import com.indracompany.indrafilmsapp.data.db.entity.UserEntity
-import com.indracompany.indrafilmsapp.data.db.repository.UserDbRepository
-import com.indracompany.indrafilmsapp.listener.LoginListener
+import com.indracompany.indrafilmsapp.data.api.repository.IUserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val apiRepository: UserRepository,
-    private val dbRepository: UserDbRepository
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: IUserRepository
 ) : ViewModel() {
 
-    //  LiveData
-    private val _token = MutableLiveData<ApiResponse<Token>>()
-    val token: LiveData<ApiResponse<Token>> get() = _token
+    private val _userToken = MutableLiveData<UiState>()
+    val userToken: LiveData<UiState> get() = _userToken
 
-    //  View properties
-    var email: String? = null
-    var password: String? = null
-    var listener: LoginListener? = null
-
-    fun onBtnLoginClick(view: View) {
-        if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            listener?.onError("Todos os campos são obrigatórios.")
+    fun userLogin(user: User) {
+        if (user.email.isNullOrEmpty() || user.password.isNullOrEmpty()) {
+            _userToken.value = UiState.Error("All fields are required.")
             return
         }
 
-        viewModelScope.launch(Dispatchers.Main) {
-            listener?.onLoading()
-        }
+        _userToken.value = UiState.Loading
 
         viewModelScope.launch(Dispatchers.IO) {
-            val response = apiRepository.userLogin(User(email!!, password!!))
-
-            if (response.isSuccessful) {
-                withContext(Dispatchers.Main) {
-                    _token.value = response.body()
-                    listener?.onSuccess(token)
+            when(val response = repository.userLogin(user)) {
+                is ApiResult.Error ->  {
+                    withContext(Dispatchers.Main) {
+                        _userToken.value = UiState.Error(response.message ?: "Error response.")
+                    }
                 }
-            } else {
-                withContext(Dispatchers.Main) {
-                    listener?.onError(response.errorBody()?.string()!!)
+                is ApiResult.Success -> {
+                    val result = response.data
+                    if (result == null) {
+                        withContext(Dispatchers.Main) {
+                            _userToken.value = UiState.Error("Unexpected error.")
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            _userToken.value = UiState.Success(result)
+                        }
+                    }
                 }
             }
         }
     }
 
-    fun saveUser(userEntity: UserEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
-            dbRepository.insert(userEntity)
-        }
+    sealed class UiState {
+        object Loading: UiState()
+        class Error(val message: String): UiState()
+        class Success(val result: ApiResponse<Token>): UiState()
     }
 }

@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.indracompany.indrafilmsapp.R
 import com.indracompany.indrafilmsapp.data.api.model.Movie
 import com.indracompany.indrafilmsapp.databinding.ItemMovieCardBinding
-import com.indracompany.indrafilmsapp.listener.MainListener
+import com.indracompany.indrafilmsapp.listener.MovieListener
 
 class MovieAdapter(
     private val movies: List<Movie>,
-    private val listener: MainListener
+    private val listener: MovieListener
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -33,11 +33,7 @@ class MovieAdapter(
 
     override fun getItemCount() = movies.size
 
-    /**
-     * ViewHolder
-     */
-    inner class MovieViewHolder(
-        val binding: ItemMovieCardBinding
-    ) : RecyclerView.ViewHolder(binding.root) { }
+    inner class MovieViewHolder(val binding: ItemMovieCardBinding) :
+        RecyclerView.ViewHolder(binding.root) { }
 
 }

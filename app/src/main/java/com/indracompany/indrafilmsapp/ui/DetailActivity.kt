@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.indracompany.indrafilmsapp.R
+import com.indracompany.indrafilmsapp.adapter.loadImage
 import com.indracompany.indrafilmsapp.data.api.model.Movie
 import com.indracompany.indrafilmsapp.databinding.ActivityDetailBinding
-import com.indracompany.indrafilmsapp.util.loadImage
 
 class DetailActivity : AppCompatActivity() {
 
-    //  ViewBinding
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
             setContentView(root)
         }
 
-        val movie = intent.extras?.getParcelable<Movie>(MainActivity.KEY_MOVIE)
+        val movie = intent.extras?.getParcelable<Movie>(MovieActivity.KEY_MOVIE)
 
         toolbarSettings()
         fillFields(movie)

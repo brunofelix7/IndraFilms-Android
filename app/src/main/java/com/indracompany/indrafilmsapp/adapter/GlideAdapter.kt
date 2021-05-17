@@ -1,4 +1,4 @@
-package com.indracompany.indrafilmsapp.util
+package com.indracompany.indrafilmsapp.adapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

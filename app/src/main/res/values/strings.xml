@@ -15,7 +15,7 @@
     <string name="fields_required">Campos obrigatórios</string>
 
     <!-- ##### MainActivity ##### -->
-    <string name="txt_title">Filmes mais populares de 2020</string>
+    <string name="txt_title">Filmes mais populares de 2021</string>
     <string name="txt_bg_icon">ícone</string>
     <string name="rv_bg_img_description">Poster</string>
     <string name="rv_title_example">Avengers Endgame</string>

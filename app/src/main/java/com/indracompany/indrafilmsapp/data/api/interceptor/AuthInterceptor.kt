@@ -3,12 +3,11 @@ package com.indracompany.indrafilmsapp.data.api.interceptor
 import com.indracompany.indrafilmsapp.session.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
-import org.koin.java.KoinJavaComponent.inject
+import javax.inject.Inject
 
-class AuthInterceptor: Interceptor {
-
-    //  Koin inject
-    private val sessionManager: SessionManager by inject(SessionManager::class.java)
+class AuthInterceptor @Inject constructor(
+    private val sessionManager: SessionManager
+): Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
